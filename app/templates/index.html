@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="../static/css/news.css" type="text/css" />
+    <title>舆情分析与社会计算</title>
+    <style>
+          #copyright{
+            color:#ccccc0;
+        text-align:center;
+        }
+        #searchBar{
+            display: inline-block;
+            position: absolute;
+            right: 30px;
+            margin-top: 10px;
+        }
+        .page_nav{
+    float: right;
+
+            margin-right: 10px;
+                font-size: 12px;
+            color: #cccccc;
+}
+        .page_nav form{
+            display: inline-block;
+        }
+ .page_nav a{
+            color: rgba(17, 0, 7, 0.71);
+}
+          .pageNum{
+    font-size: 12px;
+    *font-size: 100%;
+    width: 24px;
+    height: 16px;
+    border: 1px solid #d5d5d5;
+    background: #fff;
+    /*margin-top: 4px;*/
+    text-align: center;
+          }
+        .title {
+    text-align: center;
+    background-color: rgba(45, 45, 45, 0.1);
+    padding: 10px;
+    font-size: 27px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+         .fullCard {
+             -webkit-transform:scale(0.75);
+             -moz-transform:scale(0.75);
+             -o-transform:scale(0.75);
+             float:left;
+             width: 600px;
+             height: 800px;
+             margin: 5px 5px  5px 5px;
+             padding: 10px;
+             -webkit-transition-duration: 0.5s;
+             -moz-transition-duration: 0.5s;
+             -o-transition-duration: 0.5s;
+             box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+      .cardText p{
+      width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp:19;
+      -webkit-box-orient:vertical;
+    }
+
+        .nav a {
+    border-radius: 50%;
+    display: inline-block;
+    margin-right: 21px;
+    margin-left: 30px;
+    padding: 0 .2em;
+    font-size: 14px;
+    line-height: 36px;
+    letter-spacing: 0;
+    color: #fff;
+    border: 7px solid #a40000;
+    border-width: 7px 0;
+}
+        .cardContent .image{
+            width: 364px;
+            height: 212px;
+            margin: auto;
+            padding: 10px;
+        }
+        .npl_result{
+            color: #a40000;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div id="copyright"><em> @copyright 赵晴&毛西润</em></div>
+
+
+    </div>
+
+    <section class="nav nav-news">
+	<div class="wp pr">
+		<div frag="窗口21">
+
+                <a href="/cucnews" class="">中传要闻</a>
+
+                <a href="/douban" class="">豆瓣电影</a>
+
+                <a href="" class="">情感分析</a>
+
+                <a href="/daolu" class="">城市道路</a>
+
+            <div id="searchBar">
+                    <form action="/douban">
+                        <input type="text" name="wanted" value="" default="中国">
+                        <input type="submit" value="搜索">
+                      </form>
+                </div>
+         </div>
+            </div>
+</section>
+    <div class="page_nav">
+        <div class="totalnum">每页10条记录
+    {#如果存在上一页#}
+            <a href="/index?page=1">首页</a>
+
+    {% if paginate.has_prev %}
+        <a href="/index?page={{ paginate.prev_num }}">«上一页</a>
+             {% else %}
+            «上一页
+    {% endif %}
+<!--    当前页：{{ paginate.page }}-->
+
+    {#如果存在下一页#}
+    {% if paginate.has_next %}
+         <a href="/index?page={{ paginate.next_num }}">下一页»</a>
+         {% else %}
+            下一页»
+    {% endif %}
+            <a href="/index?page={{totalpage}}">尾页</a>
+            <form action="/index?page">
+             <input class="pageNum" type="text"name="page" placeholder="{{ paginate.page }}">/{{ totalpage }}  总共{{ paginate.total }}记录</div>
+            </form>
+        <hr>
+</div>
+
+
+
+                {% for r in rs %}
+
+
+<div id="{{r.id}}" onclick="javascript:location.href='/news_result?id='+id" class="fullCard">
+
+  <div class="cardContent">
+    <div class="cardText">
+      <h4 class="title">{{r.arti_title}}</h4>
+<div class="image"><img src="{{r.picsurl}}" width="364"height="212"/></div>
+
+      <p>{{r.arti_content}}</p>
+
+    </div>
+
+  </div>
+<div class="npl_result">
+            <p>情感分析结果：{{r.sentiments}}</p>
+            <p>关键词：{{r.keywords}}</p>
+        </div>
+</div>
+
+
+{% endfor %}
+
+
+
+
+
+</body>
+</html>

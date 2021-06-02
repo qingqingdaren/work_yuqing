@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>道路网</title>
+</head>
+  <body style=" opacity:1">
+    <h1>城市道路网络</h1>
+
+
+    <div id="result_wrap">
+        <div id="image_wrap">
+             <image href="../static/du.png"></image>
+        </div>
+
+        <div id="top10_hub">
+
+            <h1 class="title">Hub值top10</h1>
+            <div></div>
+        </div>
+         <div id="top10_pagerank">
+             <h1 class="title">PageRank值top10</h1>
+            <div></div>
+        </div>
+    </div>
+    <div id="search_core">
+        <form action="/daolu">
+            <input type="text" name="core" value="" default="0">
+            <input type="submit" value="搜索">
+        </form>
+    </div>
+    <script src="../static/js/d3.v3.min.js" charset="utf-8" ></script>
+	<script type="text/javascript">
+		var  width=(window.innerWidth||document.documentElement.clientWidth||document.body.clientWidth)*0.98;
+		var  height=(window.innerHeight||document.documentElement.clientHeight||document.body.clientHeight)*0.9;
+		var  img_h=50;
+		var  img_w=50;
+		var  radius=10;
+		var svg=d3.select("body")
+                .append("svg")
+                .attr("width",width)
+                .attr("height",height);
+		var nodes={{nodes| safe}};
+		var edges={{edges| safe}};
+
+		var force=d3.layout.force()
+                .nodes(nodes)
+				.links(edges)
+				.size([width,height])
+				.linkDistance(150)
+				.charge(-600)
+                .start();
+
+		//绘制
+		var color=d3.scale.category20();
+		var lines=svg.selectAll(".forceLine")
+	             .data(edges)
+				 .enter()
+          	     .append("line")
+				 .attr("class","forceLine")
+				 .style("stroke","gray")
+				 .style("opacity",0.4)
+                 .style("stroke-width",1);
+
+		var circles=svg.selectAll("forceCircle")
+	               .data(nodes)
+				   .enter()
+				   .append("circle")
+				   .attr("class","forceCircle")
+				   .attr("r",function(d,i){return d.weight*2;})
+				   .style("stroke","DarkGray")
+				   .style("stroke-width","1.0px")
+				   .attr("fill",function(d,i){return color(i);})
+				   .call(force.drag);
+	    var texts=svg.selectAll(".forceText")
+                 .data(nodes)
+				 .enter()
+				 .append("text")
+				 .attr("class","forceText")
+				 .attr("x",function(d){return d.x;})
+				 .attr("y",function(d){return d.y;})
+				 .style("stroke", "#336666")
+				 .style("stroke-family","仿宋")
+				 .style("font-size","10px")
+                 .attr("dx","-1.5em")
+				 .attr("dy","1.5em")
+				 .text(function(d){return d.name;});
+
+		force.on("tick",function(){
+	          lines.attr("x1",function(d){return d.source.x;});
+              lines.attr("y1",function(d){return d.source.y;});
+              lines.attr("x2",function(d){return d.target.x;});
+              lines.attr("y2",function(d){return d.target.y;});
+			  circles.attr("cx",function(d){return d.x;});
+			  circles.attr("cy",function(d){return d.y;});
+			  texts.attr("x",function(d){return d.x;});
+			  texts.attr("y",function(d){return d.y;});
+		});
+	</script>
+<!--  <form action="/daolu">-->
+<!--        <input type="text" name="wanted" value="" default="0">-->
+<!--        <input type="submit" value="搜索">-->
+<!--  </form>-->
+
+  </body>
+</html>
