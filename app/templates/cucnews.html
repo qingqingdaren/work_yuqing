@@ -6,7 +6,7 @@
 </head>
 <body>
 
-<h1>豆瓣电影Top250</h1>
+<h1>中传要闻</h1>
 词条：{{wordcount}}<br>
 
 	<script src="../static/js/d3.v3.min.js"></script>
@@ -22,7 +22,7 @@ var h=window.innerHeight|| document.documentElement.clientHeight|| document.body
 		 //{text:"寻梦环游记",size:12},{text:"加勒比海盗5",size:12}];
          var words=new Array({{wordcount}});
          {% for wc in wordcloud %}
-            words[{{loop.index-1}}]={text:"{{wc[1]}}",size:"{{wc[0]}}"};
+            words[{{loop.index-1}}]={text:"{{wc[1]}}",size:"{{wc[0]/3}}"};
          {% endfor %}
 		 var wc=d3.layout.cloud()
 				  .size([w, 300])
@@ -45,7 +45,7 @@ var h=window.innerHeight|| document.documentElement.clientHeight|| document.body
 			    .enter()
 			    .append("a")
 			    .attr("xlint:href",function(d){
-								return "/douban?wanted="+d.text;
+								return "/search?wanted="+d.text;
 					 })
 			    .append("text")
 				.style("font-size", function(d) { return d.size +"px"; })
@@ -59,13 +59,13 @@ var h=window.innerHeight|| document.documentElement.clientHeight|| document.body
 		  }
 	</script>
 
-<form action="/douban">
+<form action="/search">
         <input type="text" name="wanted" value="" default="中国">
         <input type="submit" value="搜索">
 </form>
 {% for r in rs %}
-<font size="6" color="blue">{{r.id}}&nbsp<a href="{{r.link}}" target="_blank">{{r.title}}</a></font><br>
-{{r.summary}}<br>
+<font size="6" color="blue">{{r.id}}&nbsp<a href="{{r.newsurl}}" target="_blank">{{r.arti_title}}</a></font><br>
+{{r.arti_content}}<br>
 {% endfor %}
 </body>
 </html>

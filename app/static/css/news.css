@@ -1,0 +1,73 @@
+.header{
+  height: 250px;
+  background-image: url("../img/nav.jpeg");
+  background-size: 100%;
+}
+
+
+#searchBar{
+    display: inline-block;
+    position: absolute;
+    right: 30px;
+    margin-top: 10px;
+}
+
+  p {
+    text-align: justify;
+  }
+  .links {
+    text-align: left;
+    color: black;
+  }
+
+
+.nav {
+    height: 50px;
+    background: #a40000;
+    min-width: 1200px;
+    _width: 1200px;
+}
+wp, header, .wrapper {
+    margin: 0 auto;
+    width: 1200px;
+    clear: both;
+}
+
+.nav a:hover {
+    border-radius: 50%;
+    -webkit-transform:scale(1.2);
+    -moz-transform:scale(1.2);
+    -o-transform:scale(1.2);
+    -webkit-transition-duration: 0.5s;
+    -moz-transition-duration: 0.5s;
+    -o-transition-duration: 0.5s;
+}
+
+
+    .title {
+    text-align: center;
+    background-color: rgba(45, 45, 45, 0.1);
+    padding: 10px;
+    font-size: 27px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+
+  .fullCard:hover {
+    -webkit-transform:scale(0.8);
+    -webkit-box-shadow:0px 0px 30px #ccc;
+    -moz-transform:scale(0.8);
+    -moz-box-shadow:0px 0px 30px #ccc;
+    -o-transform:scale(0.8);
+    -o-box-shadow:0px 0px 30px #ccc;
+  }
+
+  .cardContent {
+    padding: 10px;
+  }
+  .cardText {
+    margin-bottom: 30px;
+  }
+

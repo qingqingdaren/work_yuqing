@@ -42,7 +42,6 @@ pyparsing==2.4.7
 python-dateutil==2.8.1
 python-graph-core==1.8.2
 requests==2.25.1
-scipy==1.5.4
 simplejson==3.17.2
 six==1.15.0
 snownlp==0.12.3
