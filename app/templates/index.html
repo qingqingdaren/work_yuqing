@@ -1,182 +1,109 @@
-<!DOCTYPE html>
-<html lang="en">
+﻿<!DOCTYPE HTML>
+<html>
 <head>
-    <meta charset="UTF-8">
-    <link rel="stylesheet" href="../static/css/news.css" type="text/css" />
-    <title>舆情分析与社会计算</title>
-    <style>
-          #copyright{
-            color:#ccccc0;
-        text-align:center;
-        }
-        #searchBar{
-            display: inline-block;
-            position: absolute;
-            right: 30px;
-            margin-top: 10px;
-        }
-        .page_nav{
-    float: right;
-
-            margin-right: 10px;
-                font-size: 12px;
-            color: #cccccc;
-}
-        .page_nav form{
-            display: inline-block;
-        }
- .page_nav a{
-            color: rgba(17, 0, 7, 0.71);
-}
-          .pageNum{
-    font-size: 12px;
-    *font-size: 100%;
-    width: 24px;
-    height: 16px;
-    border: 1px solid #d5d5d5;
-    background: #fff;
-    /*margin-top: 4px;*/
-    text-align: center;
-          }
-        .title {
-    text-align: center;
-    background-color: rgba(45, 45, 45, 0.1);
-    padding: 10px;
-    font-size: 27px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-  }
-         .fullCard {
-             -webkit-transform:scale(0.75);
-             -moz-transform:scale(0.75);
-             -o-transform:scale(0.75);
-             float:left;
-             width: 600px;
-             height: 800px;
-             margin: 5px 5px  5px 5px;
-             padding: 10px;
-             -webkit-transition-duration: 0.5s;
-             -moz-transition-duration: 0.5s;
-             -o-transition-duration: 0.5s;
-             box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-  }
-      .cardText p{
-      width: 100%;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp:19;
-      -webkit-box-orient:vertical;
-    }
-
-        .nav a {
-    border-radius: 50%;
-    display: inline-block;
-    margin-right: 21px;
-    margin-left: 30px;
-    padding: 0 .2em;
-    font-size: 14px;
-    line-height: 36px;
-    letter-spacing: 0;
-    color: #fff;
-    border: 7px solid #a40000;
-    border-width: 7px 0;
-}
-        .cardContent .image{
-            width: 364px;
-            height: 212px;
-            margin: auto;
-            padding: 10px;
-        }
-        .npl_result{
-            color: #a40000;
-        }
-
-    </style>
+<title>舆情分析与社会计算</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<link href='http://fonts.useso.com/css?family=Open+Sans:400,600' rel='stylesheet' type='text/css'>
+<link href="../static/css/style.css" rel="stylesheet" type="text/css" media="all" />
+<link rel="stylesheet" type="text/css" href="../static/css/magnific-popup.css">
+<script src="../static/js/jquery.min.js"></script>
 </head>
 <body>
-    <div class="header">
-        <div id="copyright"><em> @copyright 赵晴&毛西润</em></div>
-
-
+<!-- start header -->
+	<div class="header_bg">
+<div class="wrap">
+	<div id="content">
+      <header id="topnav">
+        <nav>
+        		 <ul>
+					<li class="active"><a href="/">主页</a></li>
+					<li><a href="/cucnews">中传要闻</a></li>
+					<li><a href="/douban">漫威电影</a></li>
+					<li><a href="/manwei">漫威关系图</a></li>
+					<li><a href="#">Copyright</a></li>
+					<div class="clear"> </div>
+				</ul>
+        </nav>
+         <div class="logo"><img src="../static/images/logo.png" alt=""></div>
+<!--        <a href="#" id="navbtn">Nav Menu</a>-->
+        <div class="clear"> </div>
+      </header><!-- @end #topnav -->
+      <script type="text/javascript"  src="../static/js/menu.js"></script>
     </div>
-
-    <section class="nav nav-news">
-	<div class="wp pr">
-		<div frag="窗口21">
-
-                <a href="/cucnews" class="">中传要闻</a>
-
-                <a href="/douban" class="">豆瓣电影</a>
-
-                <a href="" class="">情感分析</a>
-
-                <a href="/daolu" class="">城市道路</a>
-
-            <div id="searchBar">
-                    <form action="/douban">
-                        <input type="text" name="wanted" value="" default="中国">
-                        <input type="submit" value="搜索">
-                      </form>
-                </div>
-         </div>
-            </div>
-</section>
-    <div class="page_nav">
-        <div class="totalnum">每页10条记录
-    {#如果存在上一页#}
-            <a href="/index?page=1">首页</a>
-
-    {% if paginate.has_prev %}
-        <a href="/index?page={{ paginate.prev_num }}">«上一页</a>
-             {% else %}
-            «上一页
-    {% endif %}
-<!--    当前页：{{ paginate.page }}-->
-
-    {#如果存在下一页#}
-    {% if paginate.has_next %}
-         <a href="/index?page={{ paginate.next_num }}">下一页»</a>
-         {% else %}
-            下一页»
-    {% endif %}
-            <a href="/index?page={{totalpage}}">尾页</a>
-            <form action="/index?page">
-             <input class="pageNum" type="text"name="page" placeholder="{{ paginate.page }}">/{{ totalpage }}  总共{{ paginate.total }}记录</div>
-            </form>
-        <hr>
 </div>
-
-
-
-                {% for r in rs %}
-
-
-<div id="{{r.id}}" onclick="javascript:location.href='/news_result?id='+id" class="fullCard">
-
-  <div class="cardContent">
-    <div class="cardText">
-      <h4 class="title">{{r.arti_title}}</h4>
-<div class="image"><img src="{{r.picsurl}}" width="364"height="212"/></div>
-
-      <p>{{r.arti_content}}</p>
-
-    </div>
-
-  </div>
-<div class="npl_result">
-            <p>情感分析结果：{{r.sentiments}}</p>
-            <p>关键词：{{r.keywords}}</p>
-        </div>
 </div>
+<!--start-slider---->
+	<div class="slider" id="home">
+				<div class="wrap">
+				<!---start-da-slider----->
+				<div id="da-slider" class="da-slider">
+				<div class="da-slide">
+					<h2>中传要闻</h2>
+					<p>爬取中国传媒大学新闻内容并制作词云图</p>
+					<a href="/cucnews" class="da-link">了解更多</a>
+				</div>
+				<div class="da-slide">
+					<h2>漫威电影</h2>
+					<p>豆瓣标签为'漫威'的所有电影介绍及其词云图</p>
+					<a href="/douban" class="da-link">了解更多</a>
+				</div>
+				<div class="da-slide">
+					<h2>漫威关系图</h2>
+					<p>漫威电影人物关系图</p>
+					<a href="/manwei" class="da-link">了解更多</a>
+				</div>
+				<div class="da-slide">
+					<h2>@Copyright</h2>
+					<p>赵晴&毛西润</p>
+					<a href="#" class="da-link">了解更多</a>
+				</div>
+				<nav class="da-arrows">
+					<span class="da-arrows-prev"></span>
+					<span class="da-arrows-next"></span>
+				</nav>
+			</div>
+			<link rel="stylesheet" type="text/css" href="../static/css/slider.css" />
+			<script type="text/javascript" src="../static/js/modernizr.custom.28468.js"></script>
+			<script type="text/javascript" src="../static/js/jquery.cslider.js"></script>
+			<script type="text/javascript">
+				$(function() {
+				
+					$('#da-slider').cslider({
+						autoplay	: true,
+						bgincrement	: 450
+					});
+				
+				});
+			</script>
+				<!---//End-da-slider----->
+			</div>
+</div>
+	<div class="footer">
+		<div class="wrap">
+			<div class="social_2 social_3">
+	          copyright@赵晴&毛西润
+		 	  </div>
+		 	 </div>
+		 	  <!-- scroll_top_btn -->
+		<script type="text/javascript" src="../static/js/move-top.js"></script>
+		<script type="text/javascript" src="../static/js/easing.js"></script>
+	    <script type="text/javascript">
+			$(document).ready(function() {
+
+				var defaults = {
+		  			containerID: 'toTop', // fading element id
+					containerHoverID: 'toTopHover', // fading element hover id
+					scrollSpeed: 1200,
+					easingType: 'linear'
+		 		};
 
 
-{% endfor %}
+				$().UItoTop({ easingType: 'easeOutQuart' });
 
-
-
-
-
+			});
+		</script>
+		 <a href="#" id="toTop" style="display: block;"><span id="toTopHover" style="opacity: 1;"></span></a>
+</div>
 </body>
-</html>
+</html>		

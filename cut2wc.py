@@ -6,7 +6,7 @@ import time
 
 def cutwords(words):
     # print(txt)
-    jieba.load_userdict("/Users/fairy/PycharmProjects/爬虫4/AIDict.txt")
+    jieba.load_userdict("AIDict.txt")
     seg_list = jieba.cut(words, cut_all=False)
 
     tf = {}
@@ -17,7 +17,7 @@ def cutwords(words):
             tf[seg] = 1
 
     ci = list(tf.keys())
-    with open('/Users/fairy/PycharmProjects/爬虫4/stopword.txt', 'r') as ft:
+    with open('stopword.txt', 'r') as ft:
         stopword = ft.read()
     for seg in ci:
         if tf[seg] < 10 or len(seg) < 2 or seg in stopword or '一' in seg:

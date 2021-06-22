@@ -17,10 +17,9 @@ class DouBan(db.Model):
     __tablename__ = 'douban'
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255))
-    actor = db.Column(db.String(255))
-    score = db.Column(db.String(255))
+    tags = db.Column(db.String(255))
     link = db.Column(db.String(255))
-    evaluate = db.Column(db.String(255))
+    img = db.Column(db.String(255))
     summary = db.Column(db.String(10000))
 
 class WakeUp(db.Model):
